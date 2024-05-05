@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Shop Page</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>E-Shop</h1>
+    </header>
+
+    <nav>
+        <!-- Navigation links can be added here if needed -->
+    </nav>
+
+    <main id="product-display">
+        <!-- Product cards will be dynamically added here -->
+    </main>
+
+    <footer>
+        <p>&copy; 2024 E-Shop. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+/* Basic styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav {
+    background-color: #444;
+    padding: 10px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-card {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+
+window.addEventListener('load', () => {
+    fetch('https://fakestoreapi.com/products')
+    .then(response => response.json())
+    .then(products => {
+        const productDisplay = document.getElementById('product-display');
+        products.forEach(product => {
+            const productCard = document.createElement('div');
+            productCard.classList.add('product-card');
+            productCard.innerHTML = `
+                <img src="${product.image}" alt="${product.title}" style="max-width: 100%;">
+                <h2>${product.title}</h2>
+                <p>${product.price}$</p>
+                <p>${product.description}</p>
+            `;
+            productDisplay.appendChild(productCard);
+        });
+    })
+    .catch(error => console.error('Error fetching products:', error));
+});
