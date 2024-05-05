@@ -1,0 +1,20 @@
+
+function initializeGame() {
+    const cards = document.querySelectorAll('.card');
+
+    
+    cards.forEach(card => {
+        card.addEventListener('click', () => {
+            flipCard(card);
+        });
+    });
+}
+
+
+function flipCard(card) {
+    
+    card.classList.toggle('flipped');
+}
+
+
+window.addEventListener('load', initializeGame);
